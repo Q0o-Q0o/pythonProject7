@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">functions </span><span class="s0">import </span><span class="s1">get_student_by_pk</span><span class="s0">, </span><span class="s1">get_profession_by_title</span><span class="s0">, </span><span class="s1">check_fitness</span>
+
+<span class="s1">studentPk = input(</span><span class="s2">u'Введите номер студента: '</span><span class="s1">)</span>
+
+<span class="s1">student = get_student_by_pk(studentPk)</span>
+
+<span class="s0">if </span><span class="s1">student </span><span class="s0">is None</span><span class="s1">:</span>
+    <span class="s1">print(</span><span class="s2">u'У нас нет такого студента'</span><span class="s1">)</span>
+    <span class="s1">quit()</span>
+<span class="s1">print(</span><span class="s2">'Студент ' </span><span class="s1">+ student.get(</span><span class="s2">&quot;full_name&quot;</span><span class="s1">))</span>
+<span class="s1">print(</span><span class="s2">'Знает ' </span><span class="s1">+ </span><span class="s2">', '</span><span class="s1">.join(student.get(</span><span class="s2">&quot;skills&quot;</span><span class="s1">)))</span>
+
+<span class="s1">print(</span><span class="s2">'Выберите специальность для оценки студента ' </span><span class="s1">+ student.get(</span><span class="s2">&quot;full_name&quot;</span><span class="s1">))</span>
+<span class="s1">professionTitle = input()</span>
+<span class="s1">profession = get_profession_by_title(professionTitle)</span>
+<span class="s0">if </span><span class="s1">profession </span><span class="s0">is None</span><span class="s1">:</span>
+    <span class="s1">print(</span><span class="s2">&quot;У нас нет такой специальности&quot;</span><span class="s1">)</span>
+    <span class="s1">quit()</span>
+
+<span class="s1">d = check_fitness(student</span><span class="s0">, </span><span class="s1">profession)</span>
+<span class="s1">print(</span><span class="s2">'Пригодность ' </span><span class="s1">+ str(d[</span><span class="s2">&quot;fit&quot;</span><span class="s1">]) + </span><span class="s2">'%'</span><span class="s1">)</span>
+<span class="s1">print(student.get(</span><span class="s2">&quot;full_name&quot;</span><span class="s1">) + </span><span class="s2">' знает ' </span><span class="s1">+ </span><span class="s2">&quot;, &quot;</span><span class="s1">.join(d[</span><span class="s2">&quot;has&quot;</span><span class="s1">]))</span>
+<span class="s1">print(student.get(</span><span class="s2">&quot;full_name&quot;</span><span class="s1">) + </span><span class="s2">' не знает ' </span><span class="s1">+ </span><span class="s2">&quot;, &quot;</span><span class="s1">.join(d[</span><span class="s2">&quot;lacks&quot;</span><span class="s1">]))</span>
+
+</pre>
+</body>
+</html>

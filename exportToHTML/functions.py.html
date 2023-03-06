@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>functions.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+functions.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">json</span>
+
+
+<span class="s0">def </span><span class="s1">load(filename):</span>
+    <span class="s0">with </span><span class="s1">open(filename</span><span class="s0">, </span><span class="s2">'r'</span><span class="s0">, </span><span class="s1">encoding=</span><span class="s2">'utf8'</span><span class="s1">) </span><span class="s0">as </span><span class="s1">json_file:</span>
+        <span class="s0">return </span><span class="s1">json.load(json_file)</span>
+
+
+<span class="s0">def </span><span class="s1">load_students():</span>
+    <span class="s0">return </span><span class="s1">load(</span><span class="s2">'students.json'</span><span class="s1">)</span>
+
+
+<span class="s0">def </span><span class="s1">load_profession():</span>
+    <span class="s0">return </span><span class="s1">load(</span><span class="s2">'professions.json'</span><span class="s1">)</span>
+
+
+<span class="s0">def </span><span class="s1">get_student_by_pk(pk):</span>
+    <span class="s1">students = load_students()</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(len(students)):</span>
+        <span class="s1">student = students[i]</span>
+        <span class="s0">if </span><span class="s1">str(student.get(</span><span class="s2">'pk'</span><span class="s1">)) == pk:</span>
+            <span class="s0">return </span><span class="s1">student</span>
+    <span class="s0">return None</span>
+
+
+<span class="s0">def </span><span class="s1">get_profession_by_title(title):</span>
+    <span class="s1">professions = load_profession()</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(len(professions)):</span>
+        <span class="s1">profession = professions[i]</span>
+        <span class="s0">if </span><span class="s1">profession.get(</span><span class="s2">'title'</span><span class="s1">) == title:</span>
+            <span class="s0">return </span><span class="s1">profession</span>
+    <span class="s0">return None</span>
+
+
+<span class="s0">def </span><span class="s1">check_fitness(student</span><span class="s0">, </span><span class="s1">profession):</span>
+    <span class="s1">d = dict()</span>
+    <span class="s1">d[</span><span class="s2">'has'</span><span class="s1">] = list(set(student.get(</span><span class="s2">'skills'</span><span class="s1">)) &amp; set(profession.get(</span><span class="s2">'skills'</span><span class="s1">)))</span>
+    <span class="s1">a = list(set(student.get(</span><span class="s2">'skills'</span><span class="s1">)) - set(profession.get(</span><span class="s2">'skills'</span><span class="s1">)))</span>
+    <span class="s1">b = list(set(profession.get(</span><span class="s2">'skills'</span><span class="s1">)) - set(student.get(</span><span class="s2">'skills'</span><span class="s1">)))</span>
+    <span class="s1">d[</span><span class="s2">'lacks'</span><span class="s1">] = a + b</span>
+    <span class="s1">d[</span><span class="s2">'fit'</span><span class="s1">] = len(d[</span><span class="s2">'has'</span><span class="s1">]) / len(profession.get(</span><span class="s2">'skills'</span><span class="s1">)) * </span><span class="s3">100</span>
+    <span class="s0">return </span><span class="s1">d</span>
+</pre>
+</body>
+</html>
